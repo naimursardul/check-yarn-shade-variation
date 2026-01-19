@@ -54,9 +54,11 @@ initSerial();
 // ---------- API ----------
 app.get("/color", (req, res) => {
   if (!latestColor) {
-    return res.status(503).json({ error: "No data from Arduino" });
+    return res
+      .status(200)
+      .json({ success: false, hex: null, message: "No data from Arduino" });
   }
-  res.json({ hex: latestColor });
+  res.json({ success: true, hex: latestColor, message: "Color fetched" });
 });
 
 // ---------- SERVER ----------

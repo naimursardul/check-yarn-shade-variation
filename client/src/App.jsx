@@ -10,7 +10,10 @@ function App() {
         const res = await axios.get(
           `${import.meta.env.VITE_APP_SERVER_URL}/color`
         );
-        console.log(res.data);
+        if (!res.data.success) {
+          console.log(res.data.message);
+          return;
+        }
         setHex(res?.data.hex);
       } catch (error) {
         console.error("Error fetching color:", error);
